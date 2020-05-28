@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityframeworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityframeworkCore.Design" Version="3.1.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityframeworkCore.SqlServer" Version="3.1.4" />
+  </ItemGroup>
+
 </Project>
