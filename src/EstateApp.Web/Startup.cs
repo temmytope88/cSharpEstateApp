@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Estateapp.Data.DBContext.ApplicationDBContext;
 using Estateapp.Data.DBContext.AuthenticationDBContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,12 +21,22 @@ namespace EstateApp.Web
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+    public Startup(IConfiguration configuration) 
+        {
+          this.Configuration = configuration;
+               
+        }
+                public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<AuthenticationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));
+            services.AddDbContextPool<AuthenticationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
+             sqlServerOptions =>  {sqlServerOptions.MigrationsAssembly("Estateapp.Data");}
+            ));
+            services.AddDbContextPool<ApplicationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
+            sqlServerOptions =>  {sqlServerOptions.MigrationsAssembly("Estateapp.Data");}
+            ));
             services.AddControllersWithViews();
         }
 
