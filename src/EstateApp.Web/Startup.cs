@@ -1,5 +1,3 @@
-using System.Reflection.Metadata;
-using System.Net.Mime;
 using System;
 using System.Threading.Tasks;
 using Estate.Data.Entities;
@@ -29,10 +27,16 @@ namespace EstateApp.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContextPool<AuthenticationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
-       sqlServerOptions => { sqlServerOptions.MigrationsAssembly("Estateapp.Data"); }
+      services.AddDbContextPool<AuthenticationDBContext>(
+        options => options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection"),
+       
+       sqlServerOptions => { 
+         sqlServerOptions.MigrationsAssembly("Estateapp.Data"); 
+         }
       ));
-      services.AddDbContextPool<ApplicationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
+      services.AddDbContextPool<ApplicationDBContext>(
+        options => options.UseSqlServer(Configuration.GetConnectionString("ApplicationConnection"),
+      
       sqlServerOptions => { sqlServerOptions.MigrationsAssembly("Estateapp.Data"); }
       ));
      services.AddIdentity<ApplicationUser, IdentityRole>()
